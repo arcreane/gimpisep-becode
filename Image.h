@@ -1,6 +1,8 @@
 #include <string>
+#include <opencv2/opencv.hpp>
 
 using namespace std;
+using namespace cv;
 
 #pragma once
 class Image
@@ -8,6 +10,7 @@ class Image
 private:
 	string name;
 	string path;
+	Mat mat;
 public:
 	Image();
 	Image(string name, string path);
@@ -17,5 +20,7 @@ public:
 	void setName(string name);
 	string getPath();
 	void setPath(string path);
+	Mat getMat();
+	void updateMat();
 };
 
