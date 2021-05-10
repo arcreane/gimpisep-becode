@@ -1,6 +1,7 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#include "DilatationAndErosion.h"
+#include "Dilation.h"
+#include "Erosion.h"
 
 using namespace cv;
 using namespace std;
@@ -8,7 +9,7 @@ using namespace std;
 int main() {
 	cout << "Hello world" << endl;
 
-	Mat image, copy;
+	Mat image, dilationImage, erosionImage;
 
 	// Read source image
 	image = imread("./resources/van_gogh.jpg");
@@ -19,17 +20,20 @@ int main() {
 		return -1;
 	}
 
+	image.copyTo(dilationImage);
+	image.copyTo(erosionImage);
+	 
+	Dilation dilation(1,2);
+	Erosion erosion(1,2);
 
-	image.copyTo(copy);
-
-	DilatationAndErosion effect(1,2);
-
-	effect.applyEffect(image, copy);
+	dilation.applyEffect(image, dilationImage);
+	erosion.applyEffect(image, erosionImage);
 
 	//DilatationAndErosion effect;
 	//copy = effect.applyEffect(copy);
 	imshow("Image", image);
-	imshow("Result", copy);
+	imshow("Result dilation", dilationImage);
+	imshow("Result erosion", erosionImage);
 
 	
 

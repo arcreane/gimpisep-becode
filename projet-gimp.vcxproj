@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DilatationAndErosion.cpp" />
+    <ClCompile Include="Dilation.cpp" />
+    <ClCompile Include="Erosion.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DilatationAndErosion.h" />
+    <ClInclude Include="Dilation.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="Erosion.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
