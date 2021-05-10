@@ -5,7 +5,5 @@ using namespace cv;
 class Effect
 {
 public:
-	virtual void applyEffect(Mat* image);
-	
+	virtual void applyEffect(Mat source, Mat result);
 };
-
