@@ -6,7 +6,7 @@
 #include "Erosion.h"
 #include "Dilation.h"
 #include "ResizingEffect.h"
-#include "TrackBar.cpp"
+#include "utils.cpp"
 
 using namespace cv;
 using namespace std;
@@ -14,10 +14,11 @@ using namespace std;
 static const String IMAGE_WIN_NAME = "Image";
 static const String UI_WIN_NAME = "Interface utilisateur";
 Mat image;
-Mat ui(Size(400, 100), CV_8UC3);
+Mat ui(Size(500, 100), CV_8UC3);
+int changeInProgress = 0;
 
 const int alpha_slider_max = 100;
-int alpha_slider = 0;
+int alpha_slider = 50;
 
 static void on_trackbar(int, void*)
 {
@@ -30,26 +31,36 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 	if (event == EVENT_LBUTTONDBLCLK)
 	{
 		cout << "Left button of the mouse is clicked - position (" << x << ", " << y << ")" << endl;
-		if (x < 100) {
-			cout << "Erosion" << endl;
-			Erosion erosion(1, 2);
-			erosion.applyEffect(image, image);
-		}
-		else if (x > 100 && x < 200) {
-			cout << "Dilation" << endl;
-			Dilation dilation(1,2);
-			dilation.applyEffect(image, image);
-		}
+		if (changeInProgress == 0) {
 
-		if (x > 200 && x < 300) {
-			cout << "Resize" << endl;
-			
-		}
-		if (x > 300 && x < 400) {
-			cout << "Bright" << endl;
-			addTrackbar("brightness", UI_WIN_NAME);
-			//createTrackbar(UI_WIN_NAME, "brightness", &alpha_slider, alpha_slider_max, on_trackbar);
-			//on_trackbar(alpha_slider, 0);
+			if (x < 100) {
+				cout << "Erosion" << endl;
+				Erosion erosion(1, 2);
+				erosion.applyEffect(image, image);
+				changeInProgress = 1;
+			}
+			else if (x > 100 && x < 200) {
+				cout << "Dilation" << endl;
+				Dilation dilation(1,2);
+				dilation.applyEffect(image, image);
+				changeInProgress = 2;
+			}
+
+			if (x > 200 && x < 300) {
+				cout << "Resize" << endl;
+				changeInProgress = 3;
+			}
+			if (x > 300 && x < 400) {
+				cout << "Bright" << endl;
+				LightenDarken effect;
+				effect.setBrightness(100);
+				effect.applyEffect(image, image);
+
+				addTrackbar("brightness", UI_WIN_NAME);
+				changeInProgress = 4;
+				//createTrackbar(UI_WIN_NAME, "brightness", &alpha_slider, alpha_slider_max, on_trackbar);
+				//on_trackbar(alpha_slider, 0);
+			}
 		}
 
 	}
@@ -66,10 +77,14 @@ int main() {
 	Mat icon2 = imread("./resources/noun_Eye.png");
 	Mat icon3 = imread("./resources/noun_Resize.png");
 	Mat icon4 = imread("./resources/noun_brightness.png");
+	Mat iconValid = imread("./resources/noun_valid.png");
+	Mat iconCancel = imread("./resources/noun_cancel.png");
 	icon1.copyTo(ui(Rect(0, 0, 100, 100)));
 	icon2.copyTo(ui(Rect(100, 0, 100, 100)));
 	icon3.copyTo(ui(Rect(200, 0, 100, 100)));
 	icon4.copyTo(ui(Rect(300, 0, 100, 100)));
+	iconValid.copyTo(ui(Rect(425, 0, 50, 50)));
+	iconCancel.copyTo(ui(Rect(425, 50, 50, 50)));
 
 
 	// Read source image
