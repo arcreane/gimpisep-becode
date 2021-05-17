@@ -62,6 +62,22 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 				//on_trackbar(alpha_slider, 0);
 			}
 		}
+		else {
+			if (x > 425 && x < 475) {
+				if (y < 50) {
+					changeInProgress = 0;
+					//todo apply effect
+				}
+				
+				destroyWindow(UI_WIN_NAME);
+				namedWindow(UI_WIN_NAME);
+				imshow(UI_WIN_NAME, ui);
+				setMouseCallback(UI_WIN_NAME, UiCallBackFunc, (void*)&image);
+				changeInProgress = 0;
+				
+
+			}
+		}
 
 	}
 }
