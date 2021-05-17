@@ -14,18 +14,19 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 	if (event == EVENT_LBUTTONDBLCLK)
 	{
 		cout << "Left button of the mouse is clicked - position (" << x << ", " << y << ")" << endl;
-		if (x < 200) {
+		if (x < 100) {
 			cout << "Erosion" << endl;
 			Erosion erosion(1, 2);
 			erosion.applyEffect(image, image);
 		}
-		else if (x > 200 && x < 400) {
+		else if (x > 100 && x < 200) {
 			cout << "Dilation" << endl;
 			Dilation dilation(1,2);
 			dilation.applyEffect(image, image);
 		}
 
-		if (x > 400) cout << "Resize" << endl;
+		if (x > 200 && x < 300) cout << "Resize" << endl;
+		if (x > 300 && x < 400) cout << "Bright" << endl;
 
 	}
 	/*else if (event == EVENT_RBUTTONDBLCLK)
@@ -52,15 +53,17 @@ int main() {
 	cout << "Hello world" << endl;
 
 	static Mat image;
-	Mat ui(Size(600, 200), CV_8UC3);
+	Mat ui(Size(400, 100), CV_8UC3);
 
 	//add icons to the UI
 	Mat icon1 = imread("./resources/noun_Avalanche.png");
 	Mat icon2 = imread("./resources/noun_Eye.png");
 	Mat icon3 = imread("./resources/noun_Resize.png");
-	icon1.copyTo(ui(Rect(0, 0, 200, 200)));
-	icon2.copyTo(ui(Rect(200, 0, 200, 200)));
-	icon3.copyTo(ui(Rect(400, 0, 200, 200)));
+	Mat icon4 = imread("./resources/noun_brightness.png");
+	icon1.copyTo(ui(Rect(0, 0, 100, 100)));
+	icon2.copyTo(ui(Rect(100, 0, 100, 100)));
+	icon3.copyTo(ui(Rect(200, 0, 100, 100)));
+	icon4.copyTo(ui(Rect(300, 0, 100, 100)));
 
 
 	// Read source image
@@ -84,7 +87,7 @@ int main() {
 	for (;;) {
 		imshow(imageName, image);
 		imshow(uiName, ui);
-		if (cv::waitKey(15) == 27) break;
+		if (cv::waitKey(15) == 27) break; //press Esc to exit
 	}
 
 
