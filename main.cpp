@@ -1,7 +1,6 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#include "Dilation.h"
-#include "Erosion.h"
+#include "LightenDarken.h"
 
 using namespace cv;
 using namespace std;
@@ -35,9 +34,15 @@ int main() {
 	imshow("Result dilation", dilationImage);
 	imshow("Result erosion", erosionImage);
 
-	
+	Mat imageResult;
+	LightenDarken effect;
+	effect.setBrightness(100);
+	effect.applyEffect(image, imageResult);
 
-	
+	imshow("Image bright", imageResult);
+
+
+
 	
 
 	waitKey(0);
