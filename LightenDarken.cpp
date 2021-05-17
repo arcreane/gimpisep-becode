@@ -13,7 +13,7 @@ int LightenDarken::getBrightness() {
 }
 
 
-void LightenDarken::applyEffect(Mat image, Mat& result) {
+void LightenDarken::applyEffect(Mat& image, Mat& result) {
 	image.convertTo(result, -1, 1, this->brightness);
 }
 
