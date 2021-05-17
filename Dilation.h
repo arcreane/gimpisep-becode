@@ -12,6 +12,8 @@ private:
 	int dilation_size;
 public:
 	Dilation(int dilation_type, int dilation_size);
+	~Dilation();
+
 	void applyEffect(Mat& source, Mat& result);
 };
 
