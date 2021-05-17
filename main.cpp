@@ -1,6 +1,8 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include "LightenDarken.h"
+#include "Erosion.h"
+#include "Dilation.h"
 
 using namespace cv;
 using namespace std;
