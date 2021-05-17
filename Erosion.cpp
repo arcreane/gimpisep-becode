@@ -11,3 +11,7 @@ Erosion::Erosion(int erosion_type, int erosion_size) {
 	this->erosion_size = erosion_size;
 	this->erosion_type = erosion_type;
 }
+
+Erosion::~Erosion() {
+
+}
