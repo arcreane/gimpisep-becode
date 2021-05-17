@@ -14,5 +14,6 @@ public:
 	~Erosion();
 
 	void applyEffect(Mat& source, Mat& result);
+	void setParameter1(int& param);
 };
 

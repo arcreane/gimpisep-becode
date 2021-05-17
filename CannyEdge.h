@@ -20,6 +20,7 @@ public:
     void setHighThreshold(int ht);
     void setKermelSize(int ks);
     void setBlurEffect(int be);
+    void setParameter1(int& param);
 };
 
 

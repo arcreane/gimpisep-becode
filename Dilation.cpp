@@ -7,6 +7,11 @@ void Dilation::applyEffect(Mat& image, Mat& result) {
 	dilate(image, result, element);
 }
 
+void Dilation::setParameter1(int& param)
+{
+	dilation_size = param;
+}
+
 Dilation::Dilation(int dilation_type, int dilation_size) {
 	this->dilation_size = dilation_size;
 	this->dilation_type = dilation_type;
