@@ -1,6 +1,6 @@
 #include "Dilation.h"
 
-void Dilation::applyEffect(Mat image, Mat result) {
+void Dilation::applyEffect(Mat& image, Mat& result) {
 	Mat element = getStructuringElement(this->dilation_type,
 		Size(this->dilation_size + 1, this->dilation_size + 1),
 		Point(-1, -1));
