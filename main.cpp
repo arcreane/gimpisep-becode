@@ -26,7 +26,16 @@ static void onTrackbar(int param, void*)
 	param1 = param;
 	if (param < 0) param1 = 0;
 	effectInProgress->setParameter1(param1);
-	cout << param << endl;
+	cout << param1 << endl;
+}
+
+static void onTrackbar2(int param, void*)
+{
+	int param2;
+	param2 = param;
+	if (param < 0) param2 = 0;
+	effectInProgress->setParameter2(param2);
+	cout << param2 << endl;
 }
 
 void UiCallBackFunc(int event, int x, int y, int flags, void* param)
@@ -41,12 +50,14 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 				cout << "Erosion" << endl;
 				effectInProgress = new Erosion(1, 0);
 				addTrackbar("Size", UI_WIN_NAME, 20, onTrackbar);
+				addTrackbar("Type", UI_WIN_NAME, 2, onTrackbar2);
 				changeInProgress = 1;
 			}
 			else if (x > 100 && x < 200) {
 				cout << "Dilation" << endl;
 				effectInProgress = new Dilation(1, 0);
 				addTrackbar("Size", UI_WIN_NAME, 20, onTrackbar);
+				addTrackbar("Type", UI_WIN_NAME, 2, onTrackbar2);
 				changeInProgress = 2;
 			}
 			else if (x > 200 && x < 300) {
@@ -56,7 +67,8 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 			else if (x > 300 && x < 400) {
 				cout << "Bright" << endl;
 				effectInProgress = new LightenDarken(0);
-				addTrackbar("Brightness", UI_WIN_NAME, 255, onTrackbar);
+				addTrackbar("Brighter", UI_WIN_NAME, 255, onTrackbar);
+				addTrackbar("Darker", UI_WIN_NAME, 255, onTrackbar2);
 				changeInProgress = 4;
 			}
 		}
@@ -64,7 +76,10 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 			if (x > 425 && x < 475) {
 				if (y < 50) {
 					changeInProgress = 0;
-					effectInProgress->applyEffect(image, image); 
+					effectInProgress->applyEffect(image, image);
+					destroyWindow(IMAGE_WIN_NAME);
+					namedWindow(IMAGE_WIN_NAME);
+					imshow(IMAGE_WIN_NAME, image);
 				}
 				
 				destroyWindow(UI_WIN_NAME);
@@ -118,19 +133,8 @@ int main() {
 	imshow(UI_WIN_NAME, ui);
 	setMouseCallback(UI_WIN_NAME, UiCallBackFunc, (void*)&image);
 
-	
-	//createTrackbar("BarName", uiName, &alpha_slider, alpha_slider_max, on_trackbar);
-	/*
-	namedWindow("test");
-	createTrackbar("test", "Linear Blend", &alpha_slider, alpha_slider_max, on_trackbar);
-	on_trackbar(alpha_slider, 0);
-	*/
-	for (;;) {
-		imshow(IMAGE_WIN_NAME, image);
-		imshow(UI_WIN_NAME, ui);
-		if (cv::waitKey(15) == 27) break; //press Esc to exit
-	}
 
+	waitKey(0);
 	
 	return 0;
 }
