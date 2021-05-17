@@ -40,7 +40,7 @@ int main() {
 
 	//gaspard
 	Mat imageResult;
-	LightenDarken effect;
+	LightenDarken effect = LightenDarken(0);
 	effect.setBrightness(100);
 	effect.applyEffect(image, imageResult);
 	imshow("Image bright", imageResult);

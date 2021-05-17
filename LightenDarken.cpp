@@ -4,6 +4,15 @@
 using namespace cv;
 
 
+LightenDarken::LightenDarken(int brightness) {
+	this->brightness = brightness;
+}
+
+LightenDarken::~LightenDarken() {
+
+}
+
+
 void LightenDarken::setBrightness(int b) {
 	brightness = b;
 }
