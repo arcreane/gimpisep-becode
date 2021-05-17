@@ -1,6 +1,8 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include "CannyEdge.h"
+#include "LightenDarken.h"
+#include "ResizingEffect.h"
 
 using namespace cv;
 using namespace std;
@@ -11,7 +13,7 @@ int main() {
 	Mat image;
 
 	// Read source image
-	image = imread("./resources/fran�ois.jpg");
+	image = imread("./resources/francois.jpg");
 
 	if (image.empty())
 	{

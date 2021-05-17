@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CannyEdge.cpp" />
     <ClCompile Include="Dilation.cpp" />
     <ClCompile Include="Erosion.cpp" />
     <ClCompile Include="LightenDarken.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="ResizingEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CannyEdge.h" />
     <ClInclude Include="Dilation.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Erosion.h" />
