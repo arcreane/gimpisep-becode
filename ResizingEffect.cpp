@@ -1,4 +1,3 @@
-#include <opencv2/opencv.hpp>
 #include "ResizingEffect.h"
 
 using namespace cv;

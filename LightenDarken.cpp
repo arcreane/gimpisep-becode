@@ -4,6 +4,15 @@
 using namespace cv;
 
 
+LightenDarken::LightenDarken(int brightness) {
+	this->brightness = brightness;
+}
+
+LightenDarken::~LightenDarken() {
+
+}
+
+
 void LightenDarken::setBrightness(int b) {
 	brightness = b;
 }
@@ -13,7 +22,7 @@ int LightenDarken::getBrightness() {
 }
 
 
-void LightenDarken::applyEffect(Mat image, Mat& result) {
+void LightenDarken::applyEffect(Mat& image, Mat& result) {
 	image.convertTo(result, -1, 1, this->brightness);
 }
 

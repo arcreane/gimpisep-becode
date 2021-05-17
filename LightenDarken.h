@@ -1,18 +1,19 @@
-#include <opencv2/opencv.hpp>
+#pragma once
+#include "Effect.h"
 
 using namespace cv;
  
-class LightenDarken {
-
+class LightenDarken : 
+	public Effect
+{
 private:
 	int brightness;
-
-
 public:
+	LightenDarken(int brightness);
+	~LightenDarken();
 
-
-	void setBrightness(int b);
 	int getBrightness();
-	void applyEffect(Mat entrance_image, Mat& result_image);
+	void setBrightness(int b);
 
+	void applyEffect(Mat& entrance_image, Mat& result_image);
 };
