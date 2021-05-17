@@ -143,12 +143,14 @@
     <ClCompile Include="Erosion.cpp" />
     <ClCompile Include="LightenDarken.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ResizingEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dilation.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Erosion.h" />
     <ClInclude Include="LightenDarken.h" />
+    <ClInclude Include="ResizingEffect.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

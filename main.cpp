@@ -3,6 +3,7 @@
 #include "LightenDarken.h"
 #include "Erosion.h"
 #include "Dilation.h"
+#include "ResizingEffect.h"
 
 using namespace cv;
 using namespace std;
@@ -36,14 +37,21 @@ int main() {
 	imshow("Result dilation", dilationImage);
 	imshow("Result erosion", erosionImage);
 
+
+	//gaspard
 	Mat imageResult;
 	LightenDarken effect;
 	effect.setBrightness(100);
 	effect.applyEffect(image, imageResult);
-
 	imshow("Image bright", imageResult);
 
+	//louis
+	Mat resized;
+	ResizingEffect effectLouis = ResizingEffect(0.5, 0.5);
+	effectLouis.applyEffect(image, resized);
 
+	imshow("Image", image);
+	imshow("Resized image", resized);
 
 	
 
