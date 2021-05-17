@@ -1,6 +1,6 @@
 #include "Erosion.h"
 
-void Erosion::applyEffect(Mat image, Mat result) {
+void Erosion::applyEffect(Mat& image, Mat& result) {
 	Mat element = getStructuringElement(this->erosion_type,
 		Size(this->erosion_size + 1, this->erosion_size + 1),
 		Point(-1, -1));
