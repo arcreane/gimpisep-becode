@@ -12,6 +12,11 @@ void Dilation::setParameter1(int& param)
 	dilation_size = param;
 }
 
+void Dilation::setParameter2(int& param)
+{
+	dilation_type = param;
+}
+
 Dilation::Dilation(int dilation_type, int dilation_size) {
 	this->dilation_size = dilation_size;
 	this->dilation_type = dilation_type;

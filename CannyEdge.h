@@ -21,6 +21,8 @@ public:
     void setKermelSize(int ks);
     void setBlurEffect(int be);
     void setParameter1(int& param);
+    void setParameter2(int& param);
+
 };
 
 

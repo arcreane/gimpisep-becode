@@ -30,3 +30,8 @@ void LightenDarken::setParameter1(int& param) {
 	this->brightness = param;
 }
 
+void LightenDarken::setParameter2(int& param)
+{
+	this->brightness = -param;
+}
+
