@@ -17,14 +17,16 @@ static const String UI_WIN_NAME = "Interface utilisateur";
 Mat image;
 Mat ui(Size(500, 100), CV_8UC3);
 int changeInProgress = 0;
-Effect *effectInProgress;
+Effect *effectInProgress = new LightenDarken(0);
 
-const int alpha_slider_max = 100;
-int alpha_slider = 50;
 
-static void on_trackbar(int, void*)
+static void onTrackbar(int param, void*)
 {
-	cout << alpha_slider << endl;
+	int param1;
+	param1 = param;
+	if (param < 0) param1 = 0;
+	effectInProgress->setParameter1(param1);
+	cout << param << endl;
 }
 
 void UiCallBackFunc(int event, int x, int y, int flags, void* param)
@@ -37,36 +39,32 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 
 			if (x < 100) {
 				cout << "Erosion" << endl;
-				Erosion erosion(1, 2);
-				erosion.applyEffect(image, image);
+				effectInProgress = new Erosion(1, 0);
+				addTrackbar("Size", UI_WIN_NAME, 20, onTrackbar);
 				changeInProgress = 1;
 			}
 			else if (x > 100 && x < 200) {
 				cout << "Dilation" << endl;
-				Dilation dilation(1,2);
-				dilation.applyEffect(image, image);
+				effectInProgress = new Dilation(1, 0);
+				addTrackbar("Size", UI_WIN_NAME, 20, onTrackbar);
 				changeInProgress = 2;
 			}
-
-			if (x > 200 && x < 300) {
+			else if (x > 200 && x < 300) {
 				cout << "Resize" << endl;
 				changeInProgress = 3;
 			}
-			if (x > 300 && x < 400) {
+			else if (x > 300 && x < 400) {
 				cout << "Bright" << endl;
-				effectInProgress = new LightenDarken(100);
-				
-				addTrackbar("brightness", UI_WIN_NAME);
+				effectInProgress = new LightenDarken(0);
+				addTrackbar("Brightness", UI_WIN_NAME, 255, onTrackbar);
 				changeInProgress = 4;
-				//createTrackbar(UI_WIN_NAME, "brightness", &alpha_slider, alpha_slider_max, on_trackbar);
-				//on_trackbar(alpha_slider, 0);
 			}
 		}
 		else {
 			if (x > 425 && x < 475) {
 				if (y < 50) {
 					changeInProgress = 0;
-					effectInProgress.applyEffect(image, image); //todo
+					effectInProgress->applyEffect(image, image); 
 				}
 				
 				destroyWindow(UI_WIN_NAME);
