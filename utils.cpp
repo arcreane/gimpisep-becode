@@ -8,7 +8,6 @@ using namespace std;
 static void addIconsToUi(Mat& ui) {
 	Mat iconValid = imread("./resources/noun_valid.png");
 	Mat iconCancel = imread("./resources/noun_cancel.png");
-	
 }
 
 static void addTrackbar(const String barName, const String winTitle) {

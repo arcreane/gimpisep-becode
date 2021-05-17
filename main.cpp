@@ -6,6 +6,8 @@
 #include "LightenDarken.h"
 #include "ResizingEffect.h"
 #include "utils.cpp"
+#include "Erosion.h"
+#include "Dilation.h"
 
 using namespace cv;
 using namespace std;
@@ -15,6 +17,7 @@ static const String UI_WIN_NAME = "Interface utilisateur";
 Mat image;
 Mat ui(Size(500, 100), CV_8UC3);
 int changeInProgress = 0;
+Effect *effectInProgress;
 
 const int alpha_slider_max = 100;
 int alpha_slider = 50;
@@ -51,10 +54,8 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 			}
 			if (x > 300 && x < 400) {
 				cout << "Bright" << endl;
-				LightenDarken effect;
-				effect.setBrightness(100);
-				effect.applyEffect(image, image);
-
+				effectInProgress = new LightenDarken(100);
+				
 				addTrackbar("brightness", UI_WIN_NAME);
 				changeInProgress = 4;
 				//createTrackbar(UI_WIN_NAME, "brightness", &alpha_slider, alpha_slider_max, on_trackbar);
@@ -65,7 +66,7 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 			if (x > 425 && x < 475) {
 				if (y < 50) {
 					changeInProgress = 0;
-					//todo apply effect
+					effectInProgress.applyEffect(image, image); //todo
 				}
 				
 				destroyWindow(UI_WIN_NAME);
@@ -103,7 +104,7 @@ int main() {
 
 
 	// Read source image
-	image = imread("./resources/francois.jpg");
+	image = imread("./resources/van_gogh.jpg");
 
 	if (image.empty())
 	{
@@ -125,44 +126,13 @@ int main() {
 	namedWindow("test");
 	createTrackbar("test", "Linear Blend", &alpha_slider, alpha_slider_max, on_trackbar);
 	on_trackbar(alpha_slider, 0);
-*/
+	*/
 	for (;;) {
 		imshow(IMAGE_WIN_NAME, image);
 		imshow(UI_WIN_NAME, ui);
 		if (cv::waitKey(15) == 27) break; //press Esc to exit
 	}
 
-	//DilatationAndErosion effect;
-	//copy = effect.applyEffect(copy);
-	imshow("Image", image);
-	imshow("Result dilation", dilationImage);
-	imshow("Result erosion", erosionImage);
-
-
-	//gaspard
-	Mat imageResult;
-	LightenDarken effect;
-	effect.setBrightness(100);
-	effect.applyEffect(image, imageResult);
-	imshow("Image bright", imageResult);
-
-	//louis
-	Mat resized;
-	ResizingEffect effectLouis = ResizingEffect(0.5, 0.5);
-	effectLouis.applyEffect(image, resized);
-
-	imshow("Image", image);
-	imshow("Resized image", resized);
-
 	
-	return 0;
-}
-
-
-	//String test;
-	//cin >> test;
-	//cout << "Test + " + test << endl;
-	
-
 	return 0;
 }
