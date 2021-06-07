@@ -14,6 +14,7 @@ static void addIconsToUi(Mat& ui) {
 		imread("./resources/noun_Resize.png"),
 		imread("./resources/noun_brightness.png"),
 		imread("./resources/noun_detection.png"),
+		imread("./resources/noun_panorama.png"),
 	};
 	Mat iconValid = imread("./resources/noun_valid.png");
 	Mat iconCancel = imread("./resources/noun_cancel.png");
