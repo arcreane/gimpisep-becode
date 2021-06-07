@@ -33,11 +33,8 @@ static void addIconsToUi(Mat& ui) {
 
 }
 
-static void addTrackbar(const String barName, 
-						const String winTitle, 
-						const int maxValue, 
-						void onTrackbar(int param, void*)) 
-{
+static void addTrackbar(const String barName, const String winTitle, 
+						const int maxValue, void onTrackbar(int param, void*)) {
 	createTrackbar(barName, winTitle, 0, maxValue, onTrackbar);
 }
 

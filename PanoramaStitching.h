@@ -1,11 +1,22 @@
 #pragma once
 
+#include "Effect.h"
 #include <opencv2/opencv.hpp>
-using namespace cv;
 #include <vector>
 
-class PanoramaStitching {
+using namespace cv;
+using namespace std;
 
+class PanoramaStitching:
+	public Effect {
+private:
+	vector<Mat> imgs;
 public:
-	void applyEffect(std::vector<Mat>& imgs, Mat& result);
+
+	static vector<Mat>& initializeImgs();
+	PanoramaStitching();
+	PanoramaStitching(vector<Mat>& imgs);
+	~PanoramaStitching();
+	void applyEffect(Mat& source, Mat& result);
+	void setParameters(int paramIndex, int param);
 };

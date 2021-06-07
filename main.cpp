@@ -88,10 +88,11 @@ static void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 			}
 			else if (x > 500 && x < 600) {
 				cout << "Panorama" << endl;
-				//effectInProgress = new CannyEdge(1);
-				//addTrackbar("Blur Effect", UI_WIN_NAME, 15, onTrackbarChange1);
-				//addTrackbar("Threshold Low", UI_WIN_NAME, 255, onTrackbarChange2);
-				//addTrackbar("Threshold High", UI_WIN_NAME, 255, onTrackbarChange3);
+				destroyWindows();
+				vector<Mat>& imgs = PanoramaStitching::initializeImgs();
+				effectInProgress = new PanoramaStitching(imgs);
+				resetWindows();
+				setMouseCallback(UI_WIN_NAME, UiCallBackFunc, (void*)&image);
 				changeInProgress = 6;
 			}
 			else if (x > 700 && x < 800) {

@@ -144,6 +144,7 @@
     <ClCompile Include="Erosion.cpp" />
     <ClCompile Include="LightenDarken.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PanoramaStitching.cpp" />
     <ClCompile Include="ResizingEffect.cpp" />
     <ClCompile Include="saveImage.cpp" />
     <ClCompile Include="utils.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Erosion.h" />
     <ClInclude Include="LightenDarken.h" />
+    <ClInclude Include="PanoramaStitching.h" />
     <ClInclude Include="ResizingEffect.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
