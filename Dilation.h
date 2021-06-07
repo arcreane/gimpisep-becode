@@ -14,5 +14,7 @@ public:
 	~Dilation();
 
 	void applyEffect(Mat& source, Mat& result);
+	void setParameter1(int& param);
+	void setParameter2(int& param);
 };
 
