@@ -12,25 +12,25 @@
 using namespace cv;
 using namespace std;
 
-typedef void(* trackbarFunctionType) (int param, void*);
+
 
 Mat image;
 Mat ui(Size(NUMBER_OF_ICONS * 100 + 200, 100), CV_8UC3);
 int changeInProgress = 0;
 Effect *effectInProgress = new LightenDarken(0);
-int effectInProgressParameters[];
 
+//typedef void(*trackbarFunctionType) (int param, void*);
+//static trackbarFunctionType onTrackbarChange(const int paramIndex)
+//{
+//	return [paramIndex](int param, void*) {
+//		int param1;
+//		param1 = param;
+//		if (param1 < 0) param1 = 0;
+//		effectInProgressParameters[paramIndex] = param1;
+//		cout << param1 << endl;
+//	};
+//}
 
-static trackbarFunctionType onTrackbarChange(const int paramIndex)
-{
-	return [paramIndex](int param, void*) {
-		int param1;
-		param1 = param;
-		if (param1 < 0) param1 = 0;
-		effectInProgressParameters[paramIndex] = param1;
-		cout << param1 << endl;
-	};
-}
 
 //static auto onTrackbarChange(int paramIndex) -> auto (*)(int param, void*) -> void {
 //		return [](int param, void*) {
@@ -41,6 +41,35 @@ static trackbarFunctionType onTrackbarChange(const int paramIndex)
 //			cout << param1 << endl;
 //		};
 //}
+
+static void onTrackbarChange1(int param, void*) {
+	int param1;
+	param1 = param;
+	if (param1 < 0) param1 = 0;
+	effectInProgress->setParameters(0, param1);
+}
+
+static void onTrackbarChange2(int param, void*) {
+	int param1;
+	param1 = param;
+	if (param1 < 0) param1 = 0;
+	effectInProgress->setParameters(1, param1);
+}
+
+static void onTrackbarChange3(int param, void*) {
+	int param1;
+	param1 = param;
+	if (param1 < 0) param1 = 0;
+	effectInProgress->setParameters(2, param1);
+}
+
+static void onTrackbarChange4(int param, void*) {
+	int param1;
+	param1 = param;
+	if (param1 < 0) param1 = 0;
+	effectInProgress->setParameters(3, param1);
+}
+
 
 
 void UiCallBackFunc(int event, int x, int y, int flags, void* param)
@@ -54,35 +83,35 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 			if (x < 100) {
 				cout << "Erosion" << endl;
 				effectInProgress = new Erosion(1, 0);
-				addTrackbar("Size", UI_WIN_NAME, 20, onTrackbarChange(0));
-				addTrackbar("Type", UI_WIN_NAME, 2, onTrackbarChange(1));
+				addTrackbar("Size", UI_WIN_NAME, 20, onTrackbarChange1);
+				addTrackbar("Type", UI_WIN_NAME, 2, onTrackbarChange2);
 				changeInProgress = 1;
 			}
 			else if (x > 100 && x < 200) {
 				cout << "Dilation" << endl;
 				effectInProgress = new Dilation(1, 0);
-				addTrackbar("Size", UI_WIN_NAME, 20, onTrackbarChange(0));
-				addTrackbar("Type", UI_WIN_NAME, 2, onTrackbarChange(1));
+				addTrackbar("Size", UI_WIN_NAME, 20, onTrackbarChange1);
+				addTrackbar("Type", UI_WIN_NAME, 2, onTrackbarChange2);
 				changeInProgress = 2;
 			}
 			else if (x > 200 && x < 300) {
 				cout << "Resize" << endl;
 				effectInProgress = new ResizingEffect(image.cols, image.rows);
-				addTrackbar("X", UI_WIN_NAME, image.cols * 2, onTrackbarChange(0));
-				addTrackbar("Y", UI_WIN_NAME, image.rows * 2, onTrackbarChange(1));
+				addTrackbar("X", UI_WIN_NAME, image.cols * 2, onTrackbarChange1);
+				addTrackbar("Y", UI_WIN_NAME, image.rows * 2, onTrackbarChange2);
 				changeInProgress = 3;
 			}
 			else if (x > 300 && x < 400) {
 				cout << "Bright" << endl;
 				effectInProgress = new LightenDarken(0);
-				addTrackbar("Brighter", UI_WIN_NAME, 255, onTrackbarChange(0));
-				addTrackbar("Darker", UI_WIN_NAME, 255, onTrackbarChange(1));
+				addTrackbar("Brighter", UI_WIN_NAME, 255, onTrackbarChange1);
+				addTrackbar("Darker", UI_WIN_NAME, 255, onTrackbarChange2);
 				changeInProgress = 4;
 			}
 			else if (x > 400 && x < 500) {
 				cout << "Canny Edge" << endl;
 				effectInProgress = new CannyEdge(1);
-				addTrackbar("Blur Effect", UI_WIN_NAME, 15, onTrackbarChange(0));
+				addTrackbar("Blur Effect", UI_WIN_NAME, 15, onTrackbarChange1);
 				//addTrackbar("Threshold", UI_WIN_NAME, 255, onTrackbar2);
 				changeInProgress = 5;
 			}

@@ -8,5 +8,5 @@ class Effect
 {
 public:
 	virtual void applyEffect(Mat& source, Mat& result) = 0;
-	virtual void setParameters(int param[]) = 0;
+	virtual void setParameters(int paramIndex, int param) = 0;
 };

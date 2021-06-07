@@ -45,9 +45,9 @@ void CannyEdge::setBlurEffect(int be) {
 }
 
 
-void CannyEdge::setParameters(int param[])
+void CannyEdge::setParameters(int paramIndex, int param)
 {
-	setBlurEffect(param[0] + 1);
+	setBlurEffect(param + 1);
 }
 
 void CannyEdge::applyEffect(Mat& source, Mat& result) {

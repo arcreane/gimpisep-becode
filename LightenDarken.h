@@ -16,5 +16,5 @@ public:
 	void setBrightness(int b);
 
 	void applyEffect(Mat& entrance_image, Mat& result_image);
-	void setParameters(int param[]);
+	void setParameters(int paramIndex, int param);
 };
