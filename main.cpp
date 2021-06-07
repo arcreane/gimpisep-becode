@@ -16,7 +16,7 @@ static const String IMAGE_WIN_NAME = "Image";
 static const String UI_WIN_NAME = "Interface utilisateur";
 
 Mat image;
-Mat ui(Size(500, 100), CV_8UC3);
+Mat ui(Size(NUMBER_OF_ICONS * 100 + 200, 100), CV_8UC3);
 int changeInProgress = 0;
 Effect *effectInProgress = new LightenDarken(0);
 
@@ -89,7 +89,6 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 				setMouseCallback(UI_WIN_NAME, UiCallBackFunc, (void*)&image);
 				changeInProgress = 0;
 				
-
 			}
 		}
 

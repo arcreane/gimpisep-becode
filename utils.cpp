@@ -15,6 +15,7 @@ static void addIconsToUi(Mat& ui) {
 	};
 	Mat iconValid = imread("./resources/noun_valid.png");
 	Mat iconCancel = imread("./resources/noun_cancel.png");
+	Mat iconSave = imread("./resources/noun_Save.png");
 
 	for (int i = 0; i < NUMBER_OF_ICONS; i++) {
 		icons[i].copyTo(ui(Rect(i * 100, 0, 100, 100)));
@@ -22,6 +23,7 @@ static void addIconsToUi(Mat& ui) {
 
 	iconValid.copyTo(ui(Rect(NUMBER_OF_ICONS * 100 + 25, 0, 50, 50)));
 	iconCancel.copyTo(ui(Rect(NUMBER_OF_ICONS * 100 + 25, 50, 50, 50)));
+	iconSave.copyTo(ui(Rect(NUMBER_OF_ICONS * 100 + 100, 0, 100, 100)));
 
 }
 
