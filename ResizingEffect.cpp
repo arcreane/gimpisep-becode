@@ -41,3 +41,7 @@ void ResizingEffect::applyEffect(Mat& source, Mat& result) {
 void ResizingEffect::setParameter1(int& param)
 {
 }
+
+void ResizingEffect::setParameter2(int& param)
+{
+}
