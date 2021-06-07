@@ -14,6 +14,7 @@ using namespace std;
 
 static const String IMAGE_WIN_NAME = "Image";
 static const String UI_WIN_NAME = "Interface utilisateur";
+
 Mat image;
 Mat ui(Size(500, 100), CV_8UC3);
 int changeInProgress = 0;
@@ -102,18 +103,7 @@ int main() {
 	cout << "Hello world" << endl;
 
 	//add icons to the UI
-	Mat icon1 = imread("./resources/noun_Avalanche.png");
-	Mat icon2 = imread("./resources/noun_Eye.png");
-	Mat icon3 = imread("./resources/noun_Resize.png");
-	Mat icon4 = imread("./resources/noun_brightness.png");
-	Mat iconValid = imread("./resources/noun_valid.png");
-	Mat iconCancel = imread("./resources/noun_cancel.png");
-	icon1.copyTo(ui(Rect(0, 0, 100, 100)));
-	icon2.copyTo(ui(Rect(100, 0, 100, 100)));
-	icon3.copyTo(ui(Rect(200, 0, 100, 100)));
-	icon4.copyTo(ui(Rect(300, 0, 100, 100)));
-	iconValid.copyTo(ui(Rect(425, 0, 50, 50)));
-	iconCancel.copyTo(ui(Rect(425, 50, 50, 50)));
+	addIconsToUi(ui);
 
 
 	// Read source image

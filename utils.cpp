@@ -4,10 +4,25 @@
 
 using namespace cv;
 using namespace std;
+static const int NUMBER_OF_ICONS = 4;
 
 static void addIconsToUi(Mat& ui) {
+	Mat icons[NUMBER_OF_ICONS] = {
+		imread("./resources/noun_Avalanche.png"),
+		imread("./resources/noun_Eye.png"),
+		imread("./resources/noun_Resize.png"),
+		imread("./resources/noun_brightness.png")
+	};
 	Mat iconValid = imread("./resources/noun_valid.png");
 	Mat iconCancel = imread("./resources/noun_cancel.png");
+
+	for (int i = 0; i < NUMBER_OF_ICONS; i++) {
+		icons[i].copyTo(ui(Rect(i * 100, 0, 100, 100)));
+	}
+
+	iconValid.copyTo(ui(Rect(NUMBER_OF_ICONS * 100 + 25, 0, 50, 50)));
+	iconCancel.copyTo(ui(Rect(NUMBER_OF_ICONS * 100 + 25, 50, 50, 50)));
+
 }
 
 static void addTrackbar(const String barName, 
