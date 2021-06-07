@@ -8,16 +8,14 @@
 #include "utils.cpp"
 #include "Erosion.h"
 #include "Dilation.h"
+#include "saveImage.cpp"
+#include "PanoramaStitching.h"
+#include <vector>
 
 using namespace cv;
 using namespace std;
 
 
-
-Mat image;
-Mat ui(Size(NUMBER_OF_ICONS * 100 + 200, 100), CV_8UC3);
-int changeInProgress = 0;
-Effect *effectInProgress = new LightenDarken(0);
 
 //typedef void(*trackbarFunctionType) (int param, void*);
 //static trackbarFunctionType onTrackbarChange(const int paramIndex)
@@ -42,37 +40,9 @@ Effect *effectInProgress = new LightenDarken(0);
 //		};
 //}
 
-static void onTrackbarChange1(int param, void*) {
-	int param1;
-	param1 = param;
-	if (param1 < 0) param1 = 0;
-	effectInProgress->setParameters(0, param1);
-}
-
-static void onTrackbarChange2(int param, void*) {
-	int param1;
-	param1 = param;
-	if (param1 < 0) param1 = 0;
-	effectInProgress->setParameters(1, param1);
-}
-
-static void onTrackbarChange3(int param, void*) {
-	int param1;
-	param1 = param;
-	if (param1 < 0) param1 = 0;
-	effectInProgress->setParameters(2, param1);
-}
-
-static void onTrackbarChange4(int param, void*) {
-	int param1;
-	param1 = param;
-	if (param1 < 0) param1 = 0;
-	effectInProgress->setParameters(3, param1);
-}
 
 
-
-void UiCallBackFunc(int event, int x, int y, int flags, void* param)
+static void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 {
 	Mat& image = *(Mat*)param;
 	if (event == EVENT_LBUTTONDBLCLK)
@@ -116,23 +86,39 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 				addTrackbar("Threshold High", UI_WIN_NAME, 255, onTrackbarChange3);
 				changeInProgress = 5;
 			}
+			else if (x > 500 && x < 600) {
+				cout << "Panorama" << endl;
+				destroyWindows();
+				vector<Mat>& imgs = PanoramaStitching::initializeImgs();
+				effectInProgress = new PanoramaStitching(imgs);
+				resetWindows();
+				setMouseCallback(UI_WIN_NAME, UiCallBackFunc, (void*)&image);
+				changeInProgress = 6;
+			}
+			else if (x > 700 && x < 800) {
+				cout << "Sauvegarde" << endl;
+				destroyWindows();
+				saveImage(image);
+				resetWindows();
+				setMouseCallback(UI_WIN_NAME, UiCallBackFunc, (void*)&image);
+			}
 		}
 		else {
 			if (x > NUMBER_OF_ICONS * 100 + 25 && x < NUMBER_OF_ICONS * 100 + 75) {
 				if (y < 50) {
-					changeInProgress = 0;
 					effectInProgress->applyEffect(image, image);
-					destroyWindow(IMAGE_WIN_NAME);
-					namedWindow(IMAGE_WIN_NAME);
-					imshow(IMAGE_WIN_NAME, image);
 				}
-				
-				destroyWindow(UI_WIN_NAME);
-				namedWindow(UI_WIN_NAME);
-				imshow(UI_WIN_NAME, ui);
+
+				resetWindows();
 				setMouseCallback(UI_WIN_NAME, UiCallBackFunc, (void*)&image);
-				changeInProgress = 0;
 				
+				changeInProgress = 0;
+			}
+			else if (x > NUMBER_OF_ICONS * 100 + 200 && x < NUMBER_OF_ICONS * 100 + 300) {
+				effectInProgress->applyEffect(image, preview);
+				namedWindow(PREVIEW_WIN_NAME);
+				imshow(PREVIEW_WIN_NAME, preview);
+				moveWindow(PREVIEW_WIN_NAME, 100, 400);
 			}
 		}
 
@@ -140,17 +126,20 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 }
 
 
-
-
 int main() {
-	cout << "Hello world" << endl;
+	cout << "Welcome to GimpIsep by BeCoDe" << endl;
 
 	//add icons to the UI
 	addIconsToUi(ui);
 
 
 	// Read source image
-	image = imread("./resources/van_gogh.jpg");
+	cout << "Enter the path of your image file :" << endl;
+	String path = "";
+	getline(cin, path);
+	if(path != "") image = imread(path);
+	else image = imread("./resources/van_gogh.jpg");
+	
 
 	if (image.empty())
 	{
@@ -158,16 +147,13 @@ int main() {
 		return -1;
 	}
 
-	//Images
-	namedWindow(IMAGE_WIN_NAME);
-	namedWindow(UI_WIN_NAME);
-	
-	imshow(IMAGE_WIN_NAME, image);
-	imshow(UI_WIN_NAME, ui);
+	//Show Images
+	resetWindows();
 	setMouseCallback(UI_WIN_NAME, UiCallBackFunc, (void*)&image);
-
 
 	waitKey(0);
 	
+
+
 	return 0;
 }
