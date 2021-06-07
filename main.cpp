@@ -72,8 +72,8 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 			}
 			else if (x > 400 && x < 500) {
 				cout << "Canny Edge" << endl;
-				effectInProgress = new LightenDarken(0);
-				addTrackbar("Blur Effect", UI_WIN_NAME, 5, onTrackbar);
+				effectInProgress = new CannyEdge(1);
+				addTrackbar("Blur Effect", UI_WIN_NAME, 15, onTrackbar);
 				//addTrackbar("Darker", UI_WIN_NAME, 255, onTrackbar2);
 				changeInProgress = 4;
 			}

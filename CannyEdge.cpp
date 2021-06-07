@@ -2,6 +2,16 @@
 
 using namespace cv;
 
+CannyEdge::CannyEdge(int blurEffect) {
+	this->blurEffect = blurEffect;
+	setHighThreshold(100);
+	setLowThreshold(50);
+	setKermelSize(3);
+}
+
+CannyEdge::~CannyEdge() {
+}
+
 int CannyEdge::getHighThreshold() {
 	return this->highThreshold;
 }
@@ -36,6 +46,7 @@ void CannyEdge::setBlurEffect(int be) {
 
 void CannyEdge::setParameter1(int& param)
 {
+	setBlurEffect(param+1);
 }
 
 void CannyEdge::setParameter2(int& param)

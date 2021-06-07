@@ -11,6 +11,9 @@ private:
     int kermelSize;
     int blurEffect;
 public:
+    CannyEdge(int blurEffect);
+    ~CannyEdge();
+
     void applyEffect(Mat& source, Mat& result);
     int getLowThreshold();
     int getHighThreshold();
