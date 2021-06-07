@@ -26,12 +26,9 @@ void LightenDarken::applyEffect(Mat& image, Mat& result) {
 	image.convertTo(result, -1, 1, this->brightness);
 }
 
-void LightenDarken::setParameter1(int& param) {
-	this->brightness = param;
-}
 
-void LightenDarken::setParameter2(int& param)
+void LightenDarken::setParameters(int param[])
 {
-	this->brightness = -param;
+	this->brightness = param[0];
+	this->brightness = -param[0];
 }
-

@@ -38,6 +38,7 @@ void ResizingEffect::applyEffect(Mat& source, Mat& result) {
 	resize(source, result, Size(), this->scaleX, this->scaleY, INTER_LINEAR);
 }
 
-void ResizingEffect::setParameter1(int& param)
+void ResizingEffect::setParameters(int param[])
 {
+
 }

@@ -20,6 +20,6 @@ public:
     void setScaleY(double scaleY);
 
     void applyEffect(Mat& source, Mat& result);
-    void setParameter1(int& param);
+    void setParameters(int param[]);
 };
 
