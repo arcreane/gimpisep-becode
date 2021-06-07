@@ -46,3 +46,7 @@ void ResizingEffect::setParameters(int paramIndex, int param)
 	if (paramIndex == 0) setScaleX( (double) param / originalX);
 	else if (paramIndex == 1) setScaleY( (double) param / originalY);
 }
+
+void ResizingEffect::setParameter2(int& param)
+{
+}
