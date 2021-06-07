@@ -3,6 +3,8 @@
 #include "CannyEdge.h"
 #include "LightenDarken.h"
 #include "ResizingEffect.h"
+#include "PanoramaStitching.h"
+#include <vector>
 
 using namespace cv;
 using namespace std;
@@ -10,9 +12,9 @@ using namespace std;
 int main() {
 	cout << "Hello world" << endl;
 
-	Mat image;
-
-	// Read source image
+	/*
+	* 
+	* // Read source image
 	image = imread("./resources/francois.jpg");
 
 	if (image.empty())
@@ -47,6 +49,34 @@ int main() {
 
 	imshow("Image", image);
 	imshow("Resized image", resized);
+	
+	*/
+	std::vector<Mat> imgs;
+	
+	Mat image1, image2;
+	image1 = imread("./resources/halfTg.jpg");
+	image2 = imread("./resources/halfTd.jpg");
+
+	imgs.push_back(image1);
+	imgs.push_back(image2);
+
+
+	Mat result;
+	PanoramaStitching panorama;
+	panorama.applyEffect(imgs, result);
+
+
+	imshow("Image1", image1);
+	imshow("Image2", image2);
+
+	imshow("result", result);
+
+
+
+	
+
+
+	
 
 	
 
