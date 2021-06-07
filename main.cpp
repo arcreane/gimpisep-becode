@@ -14,8 +14,8 @@ using namespace std;
 
 
 
-Mat image;
-Mat ui(Size(NUMBER_OF_ICONS * 100 + 200, 100), CV_8UC3);
+Mat image, preview;
+Mat ui(Size(NUMBER_OF_ICONS * 100 + 300, 100), CV_8UC3);
 int changeInProgress = 0;
 Effect *effectInProgress = new LightenDarken(0);
 
@@ -123,16 +123,24 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 					changeInProgress = 0;
 					effectInProgress->applyEffect(image, image);
 					destroyWindow(IMAGE_WIN_NAME);
+					destroyWindow(PREVIEW_WIN_NAME);
 					namedWindow(IMAGE_WIN_NAME);
 					imshow(IMAGE_WIN_NAME, image);
 				}
 				
 				destroyWindow(UI_WIN_NAME);
+				destroyWindow(PREVIEW_WIN_NAME);
 				namedWindow(UI_WIN_NAME);
 				imshow(UI_WIN_NAME, ui);
 				setMouseCallback(UI_WIN_NAME, UiCallBackFunc, (void*)&image);
 				changeInProgress = 0;
-				
+			}
+			else if (x > NUMBER_OF_ICONS * 100 + 200 && x < NUMBER_OF_ICONS * 100 + 300) {
+				cout << "test" << endl;
+				effectInProgress->applyEffect(image, preview);
+				namedWindow(PREVIEW_WIN_NAME);
+				imshow(PREVIEW_WIN_NAME, preview);
+
 			}
 		}
 
