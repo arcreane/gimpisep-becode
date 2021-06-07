@@ -12,30 +12,36 @@
 using namespace cv;
 using namespace std;
 
+typedef void(* trackbarFunctionType) (int param, void*);
 
 Mat image;
 Mat ui(Size(NUMBER_OF_ICONS * 100 + 200, 100), CV_8UC3);
 int changeInProgress = 0;
 Effect *effectInProgress = new LightenDarken(0);
+int effectInProgressParameters[];
 
 
-static void onTrackbar(int param, void*)
+static trackbarFunctionType onTrackbarChange(const int paramIndex)
 {
-	int param1;
-	param1 = param;
-	if (param < 0) param1 = 0;
-	effectInProgress->setParameter1(param1);
-	cout << param1 << endl;
+	return [paramIndex](int param, void*) {
+		int param1;
+		param1 = param;
+		if (param1 < 0) param1 = 0;
+		effectInProgressParameters[paramIndex] = param1;
+		cout << param1 << endl;
+	};
 }
 
-static void onTrackbar2(int param, void*)
-{
-	int param2;
-	param2 = param;
-	if (param < 0) param2 = 0;
-	effectInProgress->setParameter2(param2);
-	cout << param2 << endl;
-}
+//static auto onTrackbarChange(int paramIndex) -> auto (*)(int param, void*) -> void {
+//		return [](int param, void*) {
+//			int param1;
+//			param1 = param;
+//			if (param1 < 0) param1 = 0;
+//			effectInProgressParameters[paramIndex] = param1;
+//			cout << param1 << endl;
+//		};
+//}
+
 
 void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 {
@@ -48,34 +54,37 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 			if (x < 100) {
 				cout << "Erosion" << endl;
 				effectInProgress = new Erosion(1, 0);
-				addTrackbar("Size", UI_WIN_NAME, 20, onTrackbar);
-				addTrackbar("Type", UI_WIN_NAME, 2, onTrackbar2);
+				addTrackbar("Size", UI_WIN_NAME, 20, onTrackbarChange(0));
+				addTrackbar("Type", UI_WIN_NAME, 2, onTrackbarChange(1));
 				changeInProgress = 1;
 			}
 			else if (x > 100 && x < 200) {
 				cout << "Dilation" << endl;
 				effectInProgress = new Dilation(1, 0);
-				addTrackbar("Size", UI_WIN_NAME, 20, onTrackbar);
-				addTrackbar("Type", UI_WIN_NAME, 2, onTrackbar2);
+				addTrackbar("Size", UI_WIN_NAME, 20, onTrackbarChange(0));
+				addTrackbar("Type", UI_WIN_NAME, 2, onTrackbarChange(1));
 				changeInProgress = 2;
 			}
 			else if (x > 200 && x < 300) {
 				cout << "Resize" << endl;
+				effectInProgress = new ResizingEffect(image.cols, image.rows);
+				addTrackbar("X", UI_WIN_NAME, image.cols * 2, onTrackbarChange(0));
+				addTrackbar("Y", UI_WIN_NAME, image.rows * 2, onTrackbarChange(1));
 				changeInProgress = 3;
 			}
 			else if (x > 300 && x < 400) {
 				cout << "Bright" << endl;
 				effectInProgress = new LightenDarken(0);
-				addTrackbar("Brighter", UI_WIN_NAME, 255, onTrackbar);
-				addTrackbar("Darker", UI_WIN_NAME, 255, onTrackbar2);
+				addTrackbar("Brighter", UI_WIN_NAME, 255, onTrackbarChange(0));
+				addTrackbar("Darker", UI_WIN_NAME, 255, onTrackbarChange(1));
 				changeInProgress = 4;
 			}
 			else if (x > 400 && x < 500) {
 				cout << "Canny Edge" << endl;
 				effectInProgress = new CannyEdge(1);
-				addTrackbar("Blur Effect", UI_WIN_NAME, 15, onTrackbar);
-				//addTrackbar("Darker", UI_WIN_NAME, 255, onTrackbar2);
-				changeInProgress = 4;
+				addTrackbar("Blur Effect", UI_WIN_NAME, 15, onTrackbarChange(0));
+				//addTrackbar("Threshold", UI_WIN_NAME, 255, onTrackbar2);
+				changeInProgress = 5;
 			}
 		}
 		else {
