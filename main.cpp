@@ -8,6 +8,7 @@
 #include "utils.cpp"
 #include "Erosion.h"
 #include "Dilation.h"
+#include "saveImage.cpp"
 
 using namespace cv;
 using namespace std;
@@ -83,6 +84,21 @@ static void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 				addTrackbar("Threshold High", UI_WIN_NAME, 255, onTrackbarChange3);
 				changeInProgress = 5;
 			}
+			else if (x > 500 && x < 600) {
+				cout << "Panorama" << endl;
+				//effectInProgress = new CannyEdge(1);
+				//addTrackbar("Blur Effect", UI_WIN_NAME, 15, onTrackbarChange1);
+				//addTrackbar("Threshold Low", UI_WIN_NAME, 255, onTrackbarChange2);
+				//addTrackbar("Threshold High", UI_WIN_NAME, 255, onTrackbarChange3);
+				changeInProgress = 6;
+			}
+			else if (x > 700 && x < 800) {
+				cout << "Sauvegarde" << endl;
+				destroyWindows();
+				saveImage(image);
+				resetWindows();
+				setMouseCallback(UI_WIN_NAME, UiCallBackFunc, (void*)&image);
+			}
 		}
 		else {
 			if (x > NUMBER_OF_ICONS * 100 + 25 && x < NUMBER_OF_ICONS * 100 + 75) {
@@ -115,7 +131,12 @@ int main() {
 
 
 	// Read source image
-	image = imread("./resources/van_gogh.jpg");
+	cout << "Enter the path of your image file :" << endl;
+	String path = "";
+	getline(cin, path);
+	if(path != "") image = imread(path);
+	else image = imread("./resources/van_gogh.jpg");
+	
 
 	if (image.empty())
 	{
@@ -129,5 +150,7 @@ int main() {
 
 	waitKey(0);
 	
+
+
 	return 0;
 }

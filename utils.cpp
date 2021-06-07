@@ -41,10 +41,14 @@ static void addTrackbar(const String barName,
 	createTrackbar(barName, winTitle, 0, maxValue, onTrackbar);
 }
 
-static void resetWindows() {
+static void destroyWindows() {
 	destroyWindow(UI_WIN_NAME);
 	destroyWindow(PREVIEW_WIN_NAME);
-	destroyWindow(UI_WIN_NAME);
+	destroyWindow(IMAGE_WIN_NAME);
+}
+
+static void resetWindows() {
+	destroyWindows();
 
 	namedWindow(IMAGE_WIN_NAME);
 	namedWindow(UI_WIN_NAME);
