@@ -9,6 +9,8 @@
 #include "Erosion.h"
 #include "Dilation.h"
 #include "saveImage.cpp"
+#include "PanoramaStitching.h"
+#include <vector>
 
 using namespace cv;
 using namespace std;
