@@ -12,8 +12,6 @@
 using namespace cv;
 using namespace std;
 
-static const String IMAGE_WIN_NAME = "Image";
-static const String UI_WIN_NAME = "Interface utilisateur";
 
 Mat image;
 Mat ui(Size(NUMBER_OF_ICONS * 100 + 200, 100), CV_8UC3);
@@ -72,9 +70,16 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 				addTrackbar("Darker", UI_WIN_NAME, 255, onTrackbar2);
 				changeInProgress = 4;
 			}
+			else if (x > 400 && x < 500) {
+				cout << "Canny Edge" << endl;
+				effectInProgress = new LightenDarken(0);
+				addTrackbar("Blur Effect", UI_WIN_NAME, 5, onTrackbar);
+				//addTrackbar("Darker", UI_WIN_NAME, 255, onTrackbar2);
+				changeInProgress = 4;
+			}
 		}
 		else {
-			if (x > 425 && x < 475) {
+			if (x > NUMBER_OF_ICONS * 100 + 25 && x < NUMBER_OF_ICONS * 100 + 75) {
 				if (y < 50) {
 					changeInProgress = 0;
 					effectInProgress->applyEffect(image, image);

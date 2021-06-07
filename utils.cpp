@@ -1,10 +1,11 @@
 #pragma once
 #include <iostream>
 #include <opencv2/opencv.hpp>
+#include "variables.cpp"
 
 using namespace cv;
 using namespace std;
-static const int NUMBER_OF_ICONS = 5;
+
 
 static void addIconsToUi(Mat& ui) {
 	Mat icons[NUMBER_OF_ICONS] = {
