@@ -1,17 +1,20 @@
 #pragma once
 #include <iostream>
 #include <opencv2/opencv.hpp>
+#include "variables.cpp"
 
 using namespace cv;
 using namespace std;
-static const int NUMBER_OF_ICONS = 4;
+
 
 static void addIconsToUi(Mat& ui) {
 	Mat icons[NUMBER_OF_ICONS] = {
 		imread("./resources/noun_Avalanche.png"),
 		imread("./resources/noun_Eye.png"),
 		imread("./resources/noun_Resize.png"),
-		imread("./resources/noun_brightness.png")
+		imread("./resources/noun_brightness.png"),
+		imread("./resources/noun_detection.png"),
+		imread("./resources/noun_panorama.png"),
 	};
 	Mat iconValid = imread("./resources/noun_valid.png");
 	Mat iconCancel = imread("./resources/noun_cancel.png");

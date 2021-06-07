@@ -9,9 +9,11 @@ class ResizingEffect :
 private:
     double scaleX;
     double scaleY;
+    int originalX;
+    int originalY;
 public:
     ResizingEffect();
-    ResizingEffect(double scaleX, double scaleY);
+    ResizingEffect(int x, int y);
     ~ResizingEffect();
 
     double getScaleX();
@@ -20,6 +22,6 @@ public:
     void setScaleY(double scaleY);
 
     void applyEffect(Mat& source, Mat& result);
-    void setParameter1(int& param);
+    void setParameters(int paramIndex, int param);
 };
 

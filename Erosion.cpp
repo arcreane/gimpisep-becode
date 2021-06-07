@@ -7,14 +7,10 @@ void Erosion::applyEffect(Mat& image, Mat& result) {
 	erode(image, result, element);
 }
 
-void Erosion::setParameter1(int& param)
+void Erosion::setParameters(int paramIndex, int param)
 {
-	erosion_size = param;
-}
-
-void Erosion::setParameter2(int& param)
-{
-	erosion_type = param;
+	if (paramIndex == 0) erosion_size = param;
+	else if (paramIndex == 1) erosion_type = param;
 }
 
 Erosion::Erosion(int erosion_type, int erosion_size) {
