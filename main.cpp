@@ -112,7 +112,8 @@ void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 				cout << "Canny Edge" << endl;
 				effectInProgress = new CannyEdge(1);
 				addTrackbar("Blur Effect", UI_WIN_NAME, 15, onTrackbarChange1);
-				//addTrackbar("Threshold", UI_WIN_NAME, 255, onTrackbar2);
+				addTrackbar("Threshold Low", UI_WIN_NAME, 255, onTrackbarChange2);
+				addTrackbar("Threshold High", UI_WIN_NAME, 255, onTrackbarChange3);
 				changeInProgress = 5;
 			}
 		}
