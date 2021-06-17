@@ -15,3 +15,4 @@ static Mat image, preview;
 static Mat ui(Size(NUMBER_OF_ICONS * 100 + 300, 100), CV_8UC3);
 static int changeInProgress = 0;
 static Effect* effectInProgress = new LightenDarken(0);
+static Mat imageToStitche;

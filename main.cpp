@@ -89,10 +89,10 @@ static void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 			else if (x > 500 && x < 600) {
 				cout << "Panorama" << endl;
 				destroyWindows();
-				vector<Mat>& imgs = PanoramaStitching::initializeImgs();
-				effectInProgress = new PanoramaStitching(imgs);
+				PanoramaStitching::setImageToStiche();
 				resetWindows();
 				setMouseCallback(UI_WIN_NAME, UiCallBackFunc, (void*)&image);
+				effectInProgress = new PanoramaStitching();
 				changeInProgress = 6;
 			}
 			else if (x > 700 && x < 800) {

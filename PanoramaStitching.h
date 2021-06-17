@@ -9,13 +9,10 @@ using namespace std;
 
 class PanoramaStitching:
 	public Effect {
-private:
-	vector<Mat> imgs;
 public:
 
-	static vector<Mat>& initializeImgs();
+	static void setImageToStiche();
 	PanoramaStitching();
-	PanoramaStitching(vector<Mat>& imgs);
 	~PanoramaStitching();
 	void applyEffect(Mat& source, Mat& result);
 	void setParameters(int paramIndex, int param);
