@@ -47,7 +47,7 @@ static void UiCallBackFunc(int event, int x, int y, int flags, void* param)
 	Mat& image = *(Mat*)param;
 	if (event == EVENT_LBUTTONDBLCLK)
 	{
-		cout << "Left button of the mouse is clicked - position (" << x << ", " << y << ")" << endl;
+		//cout << "Left button of the mouse is clicked - position (" << x << ", " << y << ")" << endl;
 		if (changeInProgress == 0) {
 
 			if (x < 100) {
